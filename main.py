@@ -1,10 +1,13 @@
-# from threading import Thread
 from bot import start_bot
 import telebot
+import sys
 
-token = '5018142768:AAGZ0ysTkIi4dqP1tNdPhwZE1Vq8GrdhSFo'
 # here you need to set up target folders
-message_path = 'd:/_AI/work/ID_R&D/Telegram_bot/'
+message_path = sys.path[0]
+
+# put your token to working folder
+f = open(message_path + '/token.txt', 'r')
+token = str(f.readline())
 
 # Here start your chat bot
 bot = telebot.TeleBot(token, parse_mode=None)
@@ -13,6 +16,7 @@ bot = telebot.TeleBot(token, parse_mode=None)
 start_bot(bot, message_path)
 
 
+# here you can setup your password to stop collecting data
 @bot.message_handler(commands=['password'])
 def stop_command(message):
     print("the bot finished his job")
@@ -20,8 +24,5 @@ def stop_command(message):
 
 
 bot.infinity_polling()
-# Press the green button in the gutter to run the script.
+
 # if __name__ == '__main__':
-#    print_hi('PyCharm')
-#
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/

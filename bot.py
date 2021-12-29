@@ -2,15 +2,14 @@ from subprocess import Popen
 import os
 import cv2
 
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
-face_cascade=cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
 # idrd_bot
 def start_bot(bot, message_path):
     suffix = ['ogg', 'wav', 'jpg', 'png']
     voice_message_path = os.path.join(message_path, 'voice_message/')
     photo_path = os.path.join(message_path, 'photo_message/')
-
 
     @bot.message_handler(content_types=['voice'])
     def voice_processing(message):
@@ -25,7 +24,6 @@ def start_bot(bot, message_path):
         process.communicate()
         os.remove(voice_message_path + file_name)
         print(f"Аудио сообщение от user {message.from_user.id} успешно конвертировано")
-
 
     @bot.message_handler(content_types=['photo'])
     def photo_processing(message):
